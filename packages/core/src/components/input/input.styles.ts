@@ -43,16 +43,16 @@ export const styles = css`
     border-color: var(--accent-main, #4f46e5);
   }
 
-  /* State: Error - ideally add a 'danger' token to color.json later? */
+  /* State: Error */
   :host([error]) [part="input"] {
-    border-color: #ff3333;
-    box-shadow: 4px 4px 0px #ff3333;
+    border-color: var(--color-danger, #e5484d);
+    box-shadow: 4px 4px 0px var(--color-danger, #e5484d);
   }
 
   [part="error-message"] {
     font-family: var(--font-family-body, sans-serif);
     font-size: var(--font-size-xs, 0.75rem);
-    color: #ff3333;
+    color: var(--color-danger, #e5484d);
     font-weight: var(--font-weight-medium, 500);
   }
 

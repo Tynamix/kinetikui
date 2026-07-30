@@ -26,7 +26,11 @@ export const styles = css`
     visibility: hidden;
     pointer-events: none;
     transform: translateY(-8px);
-    transition: all var(--motion-fast) var(--motion-spring);
+    /* top/left (the computed anchor position) must snap instantly, not
+       animate — only the entrance itself should transition. */
+    transition: opacity var(--motion-fast) var(--motion-spring),
+      visibility var(--motion-fast) var(--motion-spring),
+      transform var(--motion-fast) var(--motion-spring);
   }
 
 

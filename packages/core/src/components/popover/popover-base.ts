@@ -4,7 +4,7 @@ import { property, state, query } from "lit/decorators.js";
 export class PopoverBase extends LitElement {
   @property({ type: Boolean, reflect: true }) open = false;
   @property({ type: String }) placement: "bottom-start" | "bottom-end" | "top-start" | "top-end" = "bottom-start";
-  @property({ type: Boolean }) autoPosition = true;
+  @property({ type: Boolean, attribute: "auto-position" }) autoPosition = true;
 
   @state() private _x = 0;
   @state() private _y = 0;
@@ -15,22 +15,34 @@ export class PopoverBase extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     document.addEventListener("click", this._handleOutsideClick);
-    window.addEventListener("resize", this._calculatePosition);
-    window.addEventListener("scroll", this._calculatePosition, true);
+    window.addEventListener("resize", this._handleReposition);
+    window.addEventListener("scroll", this._handleReposition, true);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener("click", this._handleOutsideClick);
-    window.removeEventListener("resize", this._calculatePosition);
-    window.removeEventListener("scroll", this._calculatePosition, true);
+    window.removeEventListener("resize", this._handleReposition);
+    window.removeEventListener("scroll", this._handleReposition, true);
   }
 
-  updated(changedProperties: Map<string | number | symbol, unknown>) {
+  firstUpdated() {
+    if (this.open) this._calculatePosition();
+  }
+
+  // Runs before the DOM re-renders, while the popover is still in its old
+  // (closed, but measurable) layout — so the position is correct in the
+  // very same frame the popover becomes visible, instead of snapping into
+  // place a tick after a visible flash at (0, 0).
+  protected willUpdate(changedProperties: Map<string | number | symbol, unknown>) {
     if (changedProperties.has("open") && this.open) {
-      setTimeout(() => this._calculatePosition(), 0);
+      this._calculatePosition();
     }
   }
+
+  private _handleReposition = () => {
+    if (this.open) this._calculatePosition();
+  };
 
   private _toggle() {
     this.open = !this.open;

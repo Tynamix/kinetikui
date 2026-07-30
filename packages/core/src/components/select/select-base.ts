@@ -14,6 +14,11 @@ export class SelectBase extends LitElement {
   @query('[part="trigger"]') triggerEl!: HTMLElement;
   @query('slot:not([name])') defaultSlot!: HTMLSlotElement;
 
+  // Mirrors kp-popover's own `open` state so the trigger chevron stays in sync
+  // even when the popover closes itself (e.g. an outside click), rather than
+  // this component maintaining a second, independently-toggled copy of it.
+  private _popoverObserver?: MutationObserver;
+
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener("kp-option-select", this._handleOptionSelect as EventListener);
@@ -22,10 +27,21 @@ export class SelectBase extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener("kp-option-select", this._handleOptionSelect as EventListener);
+    this._popoverObserver?.disconnect();
   }
 
   firstUpdated() {
     this._syncOptions();
+
+    if (this.popoverEl) {
+      this._popoverObserver = new MutationObserver(() => {
+        this._isOpen = this.popoverEl?.open ?? false;
+      });
+      this._popoverObserver.observe(this.popoverEl, {
+        attributes: true,
+        attributeFilter: ["open"],
+      });
+    }
   }
 
   updated(changedProperties: Map<string | number | symbol, unknown>) {
@@ -61,30 +77,30 @@ export class SelectBase extends LitElement {
   private _handleOptionSelect = (e: CustomEvent) => {
     this.value = e.detail.value;
     if (this.popoverEl) this.popoverEl.open = false;
-    this._isOpen = false;
     this.dispatchEvent(new Event("change", { bubbles: true, composed: true }));
   };
 
-  private _handleTriggerClick = () => {
-    if (this.disabled) return;
+  private _handleTriggerClick = (e: MouseEvent) => {
+    // Stop the click from bubbling into kp-popover's own trigger handler,
+    // which has no concept of `disabled` and would otherwise still open.
+    if (this.disabled) {
+      e.stopPropagation();
+      return;
+    }
 
     if (this.triggerEl) {
       this._triggerWidth = this.triggerEl.getBoundingClientRect().width;
     }
 
-    this._isOpen = !this._isOpen;
-  };
-
-  private _handlePopoverClick = () => {
-    requestAnimationFrame(() => {
-      this._isOpen = this.popoverEl?.open || false;
-    });
+    // kp-popover toggles its own `open` state in response to this same click
+    // bubbling up through the trigger slot; the MutationObserver above is
+    // what keeps `_isOpen` (and therefore the chevron) truthful afterwards.
   };
 
   protected render() {
     return html`
-      <kp-popover @click=${this._handlePopoverClick}>
-        
+      <kp-popover>
+
         <div
           slot="trigger"
           part="trigger"

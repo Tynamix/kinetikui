@@ -6,9 +6,10 @@ export const styles = css`
   }
 
   [part="base"] {
+    display: block;
     box-sizing: border-box;
     text-decoration: none;
-    
+
     padding: var(--spacing-lg);
     
     background: var(--color-surface);

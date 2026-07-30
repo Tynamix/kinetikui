@@ -114,12 +114,13 @@ export const textareaStyles = css`
     font-family: var(--font-family-body);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
-    color: var(--accent-shift-3);
+    color: var(--color-danger);
     margin-top: 4px;
   }
 
   .has-error textarea {
-    border-color: var(--accent-shift-3);
+    border-color: var(--color-danger);
+    box-shadow: 4px 4px 0px var(--color-danger);
   }
 
   :host * {

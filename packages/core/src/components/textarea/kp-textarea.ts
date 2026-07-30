@@ -1,6 +1,6 @@
 import { customElement } from 'lit/decorators.js';
-import { TextareaBase } from './textarea-base';
-import { textareaStyles } from './textarea.styles';
+import { TextareaBase } from './textarea-base.js';
+import { textareaStyles } from './textarea.styles.js';
 
 @customElement('kp-textarea')
 export class KpTextarea extends TextareaBase {

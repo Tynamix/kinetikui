@@ -13,7 +13,10 @@
     "focus": {
       "value": "{accent.shift-1}",
       "comment": "The high visibility pink used for focused states to ensure ne-brutalist contrast"
-    }
+    },
+    "danger": { "value": "#e5484d" },
+    "success": { "value": "#2f9e44" },
+    "warning": { "value": "#f5a623" }
   },
   "accent": {
     "main": {

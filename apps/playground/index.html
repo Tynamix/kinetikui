@@ -12,122 +12,116 @@
     rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet">
-
-  <style>
-    :root {
-      --playground-max-width: 1400px;
-      --section-gap: 3rem;
-    }
-
-    body {
-      margin: 0;
-      font-family: Inter, system-ui, sans-serif;
-      background: #0f1115;
-      color: white;
-    }
-
-    #app {
-      max-width: var(--playground-max-width);
-      margin: 0 auto;
-      padding: 2.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: var(--section-gap);
-    }
-
-    h1 {
-      font-family: "Bricolage Grotesque", sans-serif;
-      font-size: 2.2rem;
-      margin: 0;
-    }
-
-    .section {
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .section-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      opacity: 0.6;
-    }
-
-    .grid {
-      display: grid;
-      gap: 1.5rem;
-    }
-
-    .grid-3 {
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    }
-
-    .grid-4 {
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-
-    .demo-card {
-      background: var(--color-surface);
-      border-radius: var(--radius-container);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.04),
-        0 10px 30px rgba(0, 0, 0, 0.4);
-    }
-
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      align-items: center;
-    }
-  </style>
 </head>
 
 <body>
-  <div id="app">
 
-    <h1>KinetikUI Playground</h1>
+  <header class="site-header">
+    <div class="site-header__brand">
+      <span class="site-header__brand-mark">KinetikUI</span>
+      <span class="site-header__tagline">Kinetic Pop component playground</span>
+    </div>
+    <nav class="site-nav">
+      <a href="#buttons">Buttons</a>
+      <a href="#typography">Typography</a>
+      <a href="#badges">Badges &amp; Avatars</a>
+      <a href="#forms">Forms</a>
+      <a href="#navigation">Navigation</a>
+      <a href="#overlays">Overlays</a>
+      <a href="#feedback">Feedback</a>
+      <a href="#layout">Layout</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="hero">
+      <kp-text variant="heading-1" as="h1">Every component, one page.</kp-text>
+      <p>A living showcase of the KinetikUI design system — hard shadows, thick borders, spring
+        physics, and dynamic HSL color math, all built as framework-agnostic Web Components.</p>
+    </div>
 
     <!-- BUTTONS -->
-    <section class="section">
-      <div class="section-title">Buttons</div>
+    <section class="section" id="buttons">
+      <div class="section-heading">
+        <span class="section-eyebrow">Actions</span>
+        <kp-text variant="heading-2" as="h2">Buttons</kp-text>
+      </div>
 
       <div class="demo-card">
         <div class="row">
           <kp-button variant="primary">Primary</kp-button>
           <kp-button variant="secondary">Secondary</kp-button>
-          <kp-button disabled>Disabled</kp-button>
+          <kp-button variant="primary" disabled>Disabled</kp-button>
+          <kp-button variant="primary" href="#buttons">Link button</kp-button>
+          <kp-button variant="secondary">
+            <kp-icon>
+              <svg viewBox="0 -960 960 960" width="20" height="20">
+                <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+              </svg>
+            </kp-icon>
+          </kp-button>
         </div>
       </div>
     </section>
 
     <!-- TYPOGRAPHY -->
-    <section class="section">
-      <div class="section-title">Typography</div>
+    <section class="section" id="typography">
+      <div class="section-heading">
+        <span class="section-eyebrow">Type</span>
+        <kp-text variant="heading-2" as="h2">Typography</kp-text>
+      </div>
 
       <div class="demo-card">
-        <kp-text variant="heading-1" as="h1">
-          Kinetic Pop Typography
-        </kp-text>
-
-        <kp-text variant="heading-3" as="h3" color="accent">
-          Hard Shadows. Spring Physics.
-        </kp-text>
-
-        <kp-text variant="body" as="p">
-          This text inherits the Inter font.
-        </kp-text>
+        <kp-text variant="heading-1" as="h1">Heading One</kp-text>
+        <kp-text variant="heading-2" as="h2">Heading Two</kp-text>
+        <kp-text variant="heading-3" as="h3" color="accent">Heading Three, accented</kp-text>
+        <kp-text variant="body" as="p">Body text inherits the Plus Jakarta Sans family and reads
+          comfortably at default weight.</kp-text>
+        <kp-text variant="body-sm" as="p" color="muted">Small muted body text, useful for
+          captions and secondary detail.</kp-text>
       </div>
     </section>
 
-    <!-- INPUTS -->
-    <section class="section">
-      <div class="section-title">Inputs</div>
+    <!-- BADGES & AVATARS -->
+    <section class="section" id="badges">
+      <div class="section-heading">
+        <span class="section-eyebrow">Identity</span>
+        <kp-text variant="heading-2" as="h2">Badges &amp; Avatars</kp-text>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="demo-card">
+          <span class="demo-card__label">Badge variants</span>
+          <div class="row">
+            <kp-badge>Neutral</kp-badge>
+            <kp-badge variant="primary">Primary</kp-badge>
+            <kp-badge variant="success">Success</kp-badge>
+            <kp-badge variant="warning">Warning</kp-badge>
+            <kp-badge variant="danger">Danger</kp-badge>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <span class="demo-card__label">Avatar sizes &amp; shapes</span>
+          <div class="row">
+            <kp-avatar size="sm" initials="KP"></kp-avatar>
+            <kp-avatar size="md" initials="UI" shape="circle"></kp-avatar>
+            <kp-avatar size="lg" initials="AB" shape="square"></kp-avatar>
+            <kp-avatar size="xl" src="https://i.pravatar.cc/150?img=12" alt="Random avatar"></kp-avatar>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMS -->
+    <section class="section" id="forms">
+      <div class="section-heading">
+        <span class="section-eyebrow">Input</span>
+        <kp-text variant="heading-2" as="h2">Forms</kp-text>
+      </div>
+      <p class="section-description">Text inputs, textareas, and every selection control:
+        checkboxes, radios, switches, and the composite select.</p>
 
       <div class="grid grid-3">
         <div class="demo-card">
@@ -141,16 +135,9 @@
         <div class="demo-card">
           <kp-input label="Password" type="password" error="Password must contain a symbol"></kp-input>
         </div>
-      </div>
-    </section>
 
-    <!-- TEXTAREAS -->
-    <section class="section">
-      <div class="section-title">Textareas</div>
-
-      <div class="grid grid-3">
         <div class="demo-card">
-          <kp-textarea label="Bio" placeholder="Tell us about your Kinetic aesthetic..." rows="2"></kp-textarea>
+          <kp-textarea label="Bio" placeholder="Tell us about your Kinetic aesthetic..." rows="3"></kp-textarea>
         </div>
 
         <div class="demo-card">
@@ -159,28 +146,248 @@
 
         <div class="demo-card">
           <kp-textarea label="Feedback" error="Please provide more than 10 characters." value="Too short"
-            resize="vertical">
-          </kp-textarea>
+            resize="vertical"></kp-textarea>
+        </div>
+      </div>
+
+      <div class="grid grid-4">
+        <div class="demo-card">
+          <span class="demo-card__label">Checkbox</span>
+          <div class="stack-sm">
+            <kp-checkbox checked>Subscribed</kp-checkbox>
+            <kp-checkbox>Unsubscribed</kp-checkbox>
+            <kp-checkbox disabled>Disabled</kp-checkbox>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <span class="demo-card__label">Radio group</span>
+          <kp-radio-group name="plan" value="pro">
+            <kp-radio value="free">Free</kp-radio>
+            <kp-radio value="pro">Pro</kp-radio>
+            <kp-radio value="team" disabled>Team (soon)</kp-radio>
+          </kp-radio-group>
+        </div>
+
+        <div class="demo-card">
+          <span class="demo-card__label">Switch</span>
+          <div class="stack-sm">
+            <kp-switch checked>Notifications</kp-switch>
+            <kp-switch>Marketing emails</kp-switch>
+            <kp-switch disabled>Locked setting</kp-switch>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <span class="demo-card__label">Select</span>
+          <kp-select value="apple">
+            <kp-option value="apple">Apple</kp-option>
+            <kp-option value="banana">Banana</kp-option>
+            <kp-option value="cherry">Cherry</kp-option>
+          </kp-select>
         </div>
       </div>
     </section>
 
-    <!-- COMPOSITION -->
-    <section class="section">
-      <div class="section-title">Composition</div>
+    <!-- NAVIGATION -->
+    <section class="section" id="navigation">
+      <div class="section-heading">
+        <span class="section-eyebrow">Wayfinding</span>
+        <kp-text variant="heading-2" as="h2">Navigation</kp-text>
+      </div>
+
+      <div class="demo-card">
+        <span class="demo-card__label">Tabs</span>
+        <kp-tabs value="specs">
+          <kp-tab slot="nav" value="specs">Specs</kp-tab>
+          <kp-tab slot="nav" value="reviews">Reviews</kp-tab>
+          <kp-tab slot="nav" value="shipping" disabled>Shipping</kp-tab>
+
+          <kp-tab-panel value="specs">
+            <kp-text variant="body" as="p">Hard shadows, asymmetric radii, spring transitions —
+              the whole aesthetic is driven by design tokens.</kp-text>
+          </kp-tab-panel>
+          <kp-tab-panel value="reviews">
+            <kp-text variant="body" as="p">"Feels alive." — an early adopter, probably.</kp-text>
+          </kp-tab-panel>
+          <kp-tab-panel value="shipping">
+            <kp-text variant="body" as="p">Not available yet.</kp-text>
+          </kp-tab-panel>
+        </kp-tabs>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="demo-card">
+          <span class="demo-card__label">Breadcrumb</span>
+          <kp-breadcrumb>
+            <a href="#navigation">Home</a>
+            <a href="#navigation">Components</a>
+            <a href="#navigation">Navigation</a>
+          </kp-breadcrumb>
+        </div>
+
+        <div class="demo-card">
+          <span class="demo-card__label">Pagination</span>
+          <kp-pagination page="4" total-pages="9"></kp-pagination>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERLAYS -->
+    <section class="section" id="overlays">
+      <div class="section-heading">
+        <span class="section-eyebrow">Floating UI</span>
+        <kp-text variant="heading-2" as="h2">Overlays</kp-text>
+      </div>
 
       <div class="grid grid-3">
+        <div class="demo-card">
+          <span class="demo-card__label">Popover</span>
+          <kp-popover>
+            <kp-button slot="trigger" variant="secondary">Click me</kp-button>
+            <div>
+              <kp-text variant="heading-3" as="h3">Surprise!</kp-text>
+              <kp-text variant="body-sm" as="p">I automatically dodge screen edges.</kp-text>
+            </div>
+          </kp-popover>
+        </div>
 
-        <kp-card class="demo-card">
-          Some text
+        <div class="demo-card">
+          <span class="demo-card__label">Tooltip</span>
+          <div class="row">
+            <kp-tooltip content="Saves your changes" placement="top">
+              <kp-button variant="secondary">Hover me</kp-button>
+            </kp-tooltip>
+          </div>
+        </div>
 
-          <kp-textarea label="Feedback" error="Please provide more than 10 characters." value="Too short"></kp-textarea>
+        <div class="demo-card">
+          <span class="demo-card__label">Dropdown menu</span>
+          <kp-dropdown-menu>
+            <kp-button slot="trigger" variant="secondary">Actions ▾</kp-button>
+            <kp-menu-item value="edit">Edit</kp-menu-item>
+            <kp-menu-item value="duplicate">Duplicate</kp-menu-item>
+            <kp-menu-item value="delete" variant="danger">Delete</kp-menu-item>
+          </kp-dropdown-menu>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <span class="demo-card__label">Dialog</span>
+        <div class="row">
+          <kp-button id="open-dialog-btn" variant="primary">Open dialog</kp-button>
+        </div>
+
+        <kp-dialog id="demo-dialog" label="Confirm deletion">
+          <span slot="header">Delete this project?</span>
+          <kp-text variant="body" as="p">This action can't be undone. The project and all of its
+            data will be permanently removed.</kp-text>
+          <div slot="footer">
+            <kp-button id="cancel-dialog-btn" variant="secondary">Cancel</kp-button>
+            <kp-button variant="primary">Delete</kp-button>
+          </div>
+        </kp-dialog>
+      </div>
+    </section>
+
+    <!-- FEEDBACK -->
+    <section class="section" id="feedback">
+      <div class="section-heading">
+        <span class="section-eyebrow">Status</span>
+        <kp-text variant="heading-2" as="h2">Feedback</kp-text>
+      </div>
+
+      <div class="col">
+        <kp-alert variant="info">
+          <span slot="title">Heads up</span>
+          A new version of KinetikUI is available.
+        </kp-alert>
+        <kp-alert variant="success" dismissible>
+          <span slot="title">Saved</span>
+          Your changes have been saved successfully.
+        </kp-alert>
+        <kp-alert variant="warning" dismissible>
+          <span slot="title">Careful</span>
+          This setting affects every workspace member.
+        </kp-alert>
+        <kp-alert variant="danger" dismissible>
+          <span slot="title">Failed</span>
+          We couldn't reach the server. Try again shortly.
+        </kp-alert>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="demo-card">
+          <span class="demo-card__label">Progress</span>
+          <kp-progress id="demo-progress" label="Uploading…" value="35"></kp-progress>
+          <kp-progress indeterminate label="Syncing…"></kp-progress>
+        </div>
+
+        <div class="demo-card">
+          <span class="demo-card__label">Spinner</span>
+          <div class="row">
+            <kp-spinner size="sm"></kp-spinner>
+            <kp-spinner size="md"></kp-spinner>
+            <kp-spinner size="lg"></kp-spinner>
+          </div>
+        </div>
+
+        <div class="demo-card">
+          <span class="demo-card__label">Skeleton</span>
+          <div class="stack-sm">
+            <kp-skeleton variant="text" width="80%"></kp-skeleton>
+            <kp-skeleton variant="text" width="55%"></kp-skeleton>
+            <div class="row">
+              <kp-skeleton variant="circle"></kp-skeleton>
+              <kp-skeleton variant="rect" height="3rem" style="flex:1"></kp-skeleton>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAYOUT -->
+    <section class="section" id="layout">
+      <div class="section-heading">
+        <span class="section-eyebrow">Structure</span>
+        <kp-text variant="heading-2" as="h2">Layout &amp; Composition</kp-text>
+      </div>
+
+      <div class="demo-card">
+        <kp-divider>Section Divider</kp-divider>
+      </div>
+
+      <div class="demo-card">
+        <span class="demo-card__label">Accordion</span>
+        <kp-accordion value="q1">
+          <kp-accordion-item value="q1">
+            <span slot="header">What is KinetikUI?</span>
+            <kp-text variant="body-sm" as="p">A framework-agnostic Web Component design system
+              with a neo-brutalist "Kinetic Pop" aesthetic.</kp-text>
+          </kp-accordion-item>
+          <kp-accordion-item value="q2">
+            <span slot="header">Which frameworks does it support?</span>
+            <kp-text variant="body-sm" as="p">All of them — and none of them. It's built on
+              native Web Components via Lit.</kp-text>
+          </kp-accordion-item>
+          <kp-accordion-item value="q3" disabled>
+            <span slot="header">Coming soon</span>
+            <kp-text variant="body-sm" as="p">This item is disabled.</kp-text>
+          </kp-accordion-item>
+        </kp-accordion>
+      </div>
+
+      <div class="grid grid-2">
+        <kp-card>
+          <span class="demo-card__label">Composed card</span>
+
+          <kp-textarea label="Feedback" error="Please provide more than 10 characters." value="Too short">
+          </kp-textarea>
 
           <kp-input label="Password" type="password" error="Password must contain a symbol"></kp-input>
 
           <div class="row">
             <kp-button variant="secondary">Secondary</kp-button>
-
             <kp-button variant="secondary">
               <kp-icon>
                 <svg viewBox="0 -960 960 960" width="24" height="24">
@@ -193,32 +400,20 @@
           <kp-checkbox>Checkbox</kp-checkbox>
         </kp-card>
 
-        <kp-card class="demo-card">
-          <kp-popover>
-            <kp-button slot="trigger" variant="secondary">Click Me!</kp-button>
-            <div>
-              <h3>Surprise!</h3>
-              <p>I automatically dodge screen edges.</p>
-            </div>
-          </kp-popover>
+        <kp-card interactive href="#layout">
+          <span class="demo-card__label">Interactive card</span>
+          <kp-text variant="heading-3" as="h3">Clickable surface</kp-text>
+          <kp-text variant="body-sm" as="p" color="muted">Cards can render as a link and pick up
+            the standard hover/active lift.</kp-text>
         </kp-card>
-
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-title">Standalone Select</div>
+  </main>
 
-      <div class="demo-card">
-        <kp-select value="apple">
-          <kp-option value="apple">Apple</kp-option>
-          <kp-option value="banana">Banana</kp-option>
-          <kp-option value="cherry">Cherry</kp-option>
-        </kp-select>
-      </div>
-    </section>
-
-  </div>
+  <footer>
+    Built with Lit, Style Dictionary, and Turborepo.
+  </footer>
 
   <script type="module" src="/src/main.ts"></script>
 </body>
