@@ -15,6 +15,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -28,6 +31,8 @@ jobs:
       - run: pnpm --filter @kinetik/core --filter @kinetik/design-tokens build
       - run: pnpm --filter playground build --base=/${{ github.event.repository.name }}/
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/playground/dist
