@@ -25,6 +25,12 @@ pnpm --filter playground dev
 
 Open http://localhost:5173 in your browser.
 
+### GitHub Pages
+
+After the first deployment, the playground is available at https://norinot.github.io/kinetikui/. On each push to `main`, the **Deploy playground** workflow builds and deploys it. You can also run the workflow manually from the **Actions** tab.
+
+To enable deployment, set **Settings > Pages > Build and deployment > Source** to **GitHub Actions** in the repository.
+
 ## Common Commands
 
 Because this is a monorepo, you will frequently use the `--filter` flag to run scripts inside specific packages without having to cd into their directories.
